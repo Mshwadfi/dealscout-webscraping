@@ -1,7 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // experimental: {
+  //   serverActions: true,
+  //   serverComponentsExternalPackages: ['mongoose']
+  // },
+  // images: {
+  //   domains: []
+  // }
 };
 
 export default nextConfig;
