@@ -1,7 +1,7 @@
 "use client";
 
 import useIsValidUrl from "@/hooks/useIsValidUrl";
-import { scrapAndStoreProduct } from "@/lib/actions";
+import { scrapeAndStoreProduct } from "@/lib/actions";
 import { url } from "inspector";
 import { FormEvent, useState } from "react";
 
@@ -18,7 +18,7 @@ const SearchBar = () => {
 
     try {
       
-      const product = await scrapAndStoreProduct(query);
+      const product = await scrapeAndStoreProduct(query);
       console.log(product);
     } catch (error) {
       

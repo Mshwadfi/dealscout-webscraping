@@ -21,12 +21,12 @@ export const extractPrice = (...elements : any)=>{
       return '';
 }
 
-const extractCurrency = (element : any)=>{
+export const extractCurrency = (element : any)=>{
     const currencyText = element.text().trim().slice(0, 1);
   return currencyText ? currencyText : "";
 }
 
-const extractDescription = ($ : any)=>{
+export const extractDescription = ($ : any)=>{
     const selectors = [
         ".a-unordered-list .a-list-item",
         ".a-expander-content p",
