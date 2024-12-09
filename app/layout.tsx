@@ -22,7 +22,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Price Wise",
+  title: "Deal Scout",
   description: "find what ever you want with the lowest price and save your money while shopping online",
 };
 

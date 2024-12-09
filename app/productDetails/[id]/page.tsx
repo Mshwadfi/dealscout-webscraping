@@ -9,11 +9,12 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
-const ProductDetails = async ({ params }: Awaited<Props>) => {
-  const { id } = params;
+const ProductDetails = async ({ params }: Props) => {
+  const resolvedParams = await params; // Resolve the promise
+  const { id } = resolvedParams;
 
   if (!id) {
     redirect("/");
@@ -149,14 +150,6 @@ const ProductDetails = async ({ params }: Awaited<Props>) => {
         </div>
       </div>
       <div className="flex flex-col gap-16">
-        {/* <div className="flex flex-col gap-5">
-          <h3 className="text-2xl text-secondary font-semibold">
-            Product Description
-          </h3>
-          <div className="flex flex-col gap-4">
-            {product?.description?.split("\n")}
-          </div>
-        </div> */}
         <button className="btn w-fit mx-auto flex items-center justify-center gap-3 min-w-[200px]">
           <Image
             src="/assets/icons/bag.svg"
@@ -169,16 +162,6 @@ const ProductDetails = async ({ params }: Awaited<Props>) => {
           </Link>
         </button>
       </div>
-      {/* {similarProducts && similarProducts?.length > 0 && (
-        <div className="py-14 flex flex-col gap-2 w-full">
-          <p className="section-text">Similar Products</p>
-          <div className="flex flex-wrap gap-10 mt-7 w-full">
-            {similarProducts.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
-          </div>
-        </div>
-      )} */}
     </div>
   );
 };
