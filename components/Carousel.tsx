@@ -13,11 +13,13 @@ const carouselImages = [
 
 const Carousel = () => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
     const timer = setInterval(() => {
       setActiveImageIndex((prevIndex) =>(prevIndex + 1) % carouselImages.length);
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(timer);
   }, []);
@@ -25,6 +27,8 @@ const Carousel = () => {
   const handleDotClick = (index:number)=>{
         setActiveImageIndex(index);
   }
+  
+  if(!isClient) return null;
   return (
     <div className="hero-carousel relative overflow-hidden w-full h-[484px]">
       <div
