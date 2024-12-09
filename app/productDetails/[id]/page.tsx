@@ -12,7 +12,7 @@ type Props = {
   params: { id: string };
 };
 
-const ProductDetails = async ({ params }: Props) => {
+const ProductDetails = async ({ params }: Awaited<Props>) => {
   const { id } = params;
 
   if (!id) {
@@ -24,6 +24,7 @@ const ProductDetails = async ({ params }: Props) => {
     return <p>Loading...</p>; 
   }
   const similarProducts = await getSimilarProducts(id);
+
   return (
     <div className="product-container">
       <div className="flex gap-28 xl:flex-row flex-col">
@@ -34,7 +35,6 @@ const ProductDetails = async ({ params }: Props) => {
             width={580}
             height={400}
             className="mx-auto"
-            priority
           />
         </div>
         <div className="flex-1 flex flex-col">
