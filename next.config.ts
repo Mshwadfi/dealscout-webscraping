@@ -1,13 +1,5 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  // experimental: {
-  //   serverActions: true,
-  //   serverComponentsExternalPackages: ['mongoose']
-  // },
-  // images: {
-  //   domains: []
-  // }
+module.exports = {
+  images: {
+    domains: ['m.media-amazon.com'], // Add the domain here
+  },
 };
-
-export default nextConfig;
