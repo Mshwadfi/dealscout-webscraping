@@ -19,7 +19,7 @@ const Carousel = () => {
     setIsClient(true);
     const timer = setInterval(() => {
       setActiveImageIndex((prevIndex) =>(prevIndex + 1) % carouselImages.length);
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(timer);
   }, []);
@@ -42,7 +42,7 @@ const Carousel = () => {
           <div
             key={index}
             className="w-full flex-shrink-0"
-            style={{ flexBasis: "100%" }}
+            style={{ flexBasis: "100%" , height: "484px"}}
           >
             <Image
               src={image.src}
@@ -50,6 +50,7 @@ const Carousel = () => {
               width={484}
               height={484}
               className="object-contain"
+              loading="eager"
               priority
             />
           </div>
@@ -57,13 +58,15 @@ const Carousel = () => {
       </div>
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
         {carouselImages.map((_, index) => (
-          <button
-            key={index}
-            onClick={()=>handleDotClick(index)}
-            className={`w-3 h-3 rounded-full ${
-              activeImageIndex === index ? "bg-blue-500" : "bg-gray-400"
-            }`}
-          ></button>
+         <button
+         key={index}
+         aria-label={`Go to image ${index + 1}`}
+         onClick={() => handleDotClick(index)}
+         className={`w-3 h-3 rounded-full ${
+           activeImageIndex === index ? "bg-blue-500" : "bg-gray-400"
+         } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+       />
+       
         ))}
       </div>
     </div>

@@ -11,6 +11,12 @@ const Notification = {
 const THRESHOLD_PERCENTAGE = 40;
 
 
+function extractNumber(text: string | null): string | null {
+  if (!text) return null;
+  const match = text.match(/[\d.]+/);
+  return match ? match[0] : null;
+}
+
 export const extractPrice = (...elements : any)=>{
     for (const element of elements) {
         const priceText = element.text().trim();
@@ -34,6 +40,15 @@ export const extractPrice = (...elements : any)=>{
 export const extractCurrency = (element : any)=>{
     const currencyText = element.text().trim().slice(0, 1);
   return currencyText ? currencyText : "";
+}
+
+export const extractStars = (element: any): string | null => {
+  const rawStars = element.first().text().trim();
+  return extractNumber(rawStars);
+}
+export const extractReviewCount = (element: any): string | null => {
+  const rawReviewCount = element.text().trim();
+  return extractNumber(rawReviewCount);
 }
 
 export const extractDescription = ($ : any)=>{

@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import { extractCurrency, extractDescription, extractPrice } from '../utils';
+import { extractCurrency, extractDescription, extractPrice, extractReviewCount, extractStars } from '../utils';
 
 export async function scrapeAmazonProduct(url: string) {
   if(!url) return;
@@ -30,6 +30,10 @@ export async function scrapeAmazonProduct(url: string) {
 
     // Extract the product title
     const title = $('#productTitle').text().trim();
+    const numOfReviews = extractReviewCount($('#acrCustomerReviewText'));
+    const numOfStars = extractStars($('i.a-icon-star span.a-icon-alt'));
+    
+    console.log(numOfReviews ,"----", numOfStars)
     const currentPrice = extractPrice(
       $('.priceToPay span.a-price-whole'),
       $('.a.size.base.a-color-price'),
@@ -69,8 +73,8 @@ export async function scrapeAmazonProduct(url: string) {
       priceHistory: [],
       discountRate: Number(discountRate),
       category: 'category',
-      reviewsCount:100,
-      stars: 4.5,
+      reviewsCount:numOfReviews,
+      stars: numOfStars,
       isOutOfStock: outOfStock,
       description,
       lowestPrice: Number(currentPrice) || Number(originalPrice),
