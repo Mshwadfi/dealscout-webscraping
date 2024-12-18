@@ -1,6 +1,8 @@
 import Modal from "@/components/Modal";
 import PriceInfoCard from "@/components/PriceInfoCard";
 import ProductCard from "@/components/ProductCard";
+import ShareButton from "@/components/ShareButton";
+import ZoomImage from "@/components/ZoomImage";
 import { getProductById, getSimilarProducts } from "@/lib/actions";
 import { formatNumber } from "@/lib/utils";
 import { Product } from "@/types";
@@ -13,7 +15,7 @@ type Props = {
 };
 
 const ProductDetails = async ({ params }: Props) => {
-  const resolvedParams = await params; // Resolve the promise
+  const resolvedParams = await params; 
   const { id } = resolvedParams;
 
   if (!id) {
@@ -25,11 +27,12 @@ const ProductDetails = async ({ params }: Props) => {
     return <p>Loading...</p>; 
   }
   const similarProducts = await getSimilarProducts(id);
+  
 
   return (
     <div className="product-container">
       <div className="flex gap-28 xl:flex-row flex-col">
-        <div className="product-image">
+        {/* <div className="product-image">
           <Image
             src={product.image}
             alt={product.title}
@@ -37,7 +40,13 @@ const ProductDetails = async ({ params }: Props) => {
             height={400}
             className="mx-auto"
           />
-        </div>
+        </div> */}
+        <ZoomImage
+        src={product.image}
+        alt={product.title}
+        width={580}
+        height={400}
+         />
         <div className="flex-1 flex flex-col">
           <div className="flex justify-between items-start gap-5 flex-wrap pb-6">
             <div className="flex flex-col gap-3">
@@ -72,14 +81,15 @@ const ProductDetails = async ({ params }: Props) => {
                   height={20}
                 />
               </div>
-              <div className="p-2 bg-white-200 rounded-10">
+              {/* <div className="p-2 bg-white-200 rounded-10"> // share
                 <Image
                   src="/assets/icons/share.svg"
                   alt="share"
                   width={20}
                   height={20}
                 />
-              </div>
+              </div> */}
+              <ShareButton />
             </div>
           </div>
           <div className="product-info">

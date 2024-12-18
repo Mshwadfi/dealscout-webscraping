@@ -38,6 +38,9 @@ export async function GET(request: Request) {
           lowestPrice: getLowestPrice(updatedPriceHistory),
           highestPrice: getHighestPrice(updatedPriceHistory),
           averagePrice: getAveragePrice(updatedPriceHistory),
+          reviewsCount: scrapedProduct.reviewsCount 
+          ? parseInt(scrapedProduct.reviewsCount as string, 10) 
+          : 0, 
         };
 
         // Update Products in DB
@@ -50,9 +53,19 @@ export async function GET(request: Request) {
 
         // ======================== 2 CHECK EACH PRODUCT'S STATUS & SEND EMAIL ACCORDINGLY
         const emailNotifType = getEmailNotifType(
-          scrapedProduct,
+          {
+            ...scrapedProduct,
+            reviewsCount: scrapedProduct.reviewsCount 
+              ? parseInt(scrapedProduct.reviewsCount, 10) 
+              : 0, 
+            stars: scrapedProduct.stars
+              ? parseFloat(scrapedProduct.stars) 
+              : 0, 
+          },
           currentProduct
         );
+        
+        
 
         if (emailNotifType && updatedProduct.users.length > 0) {
           const productInfo = {
