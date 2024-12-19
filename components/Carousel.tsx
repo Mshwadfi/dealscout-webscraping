@@ -1,4 +1,5 @@
 "use client";
+import React from 'react';
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -62,7 +63,7 @@ const Carousel = () => {
          key={index}
          aria-label={`Go to image ${index + 1}`}
          onClick={() => handleDotClick(index)}
-         className={`w-3 h-3 rounded-full ${
+         className={`w-3 h-3 m-1 rounded-full ${
            activeImageIndex === index ? "bg-blue-500" : "bg-gray-400"
          } focus:outline-none focus:ring-2 focus:ring-blue-500`}
        />
